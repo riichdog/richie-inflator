@@ -64,6 +64,47 @@
 			}
 		},
 		"fonts": {
+			"modern_title": {
+				"font-name": "Helvetica Neue",
+				"size": "46",
+				"alternative-font-names": "Segoe UI, Arial"
+			},
+			"modern_label": {
+				"font-name": "Helvetica Neue",
+				"size": "25",
+				"alternative-font-names": "Segoe UI, Arial"
+			},
+			"modern_value": {
+				"font-name": "Helvetica Neue",
+				"size": "40",
+				"alternative-font-names": "Segoe UI, Arial"
+			},
+			"modern_scale": {
+				"font-name": "Helvetica Neue",
+				"size": "21",
+				"alternative-font-names": "Segoe UI, Arial"
+			},
+			"modern_button": {
+				"font-name": "Helvetica Neue",
+				"size": "23",
+				"bold": "true",
+				"alternative-font-names": "Segoe UI, Arial"
+			},
+			"modern_button_sub": {
+				"font-name": "Helvetica Neue",
+				"size": "20",
+				"alternative-font-names": "Segoe UI, Arial"
+			},
+			"modern_pill_label": {
+				"font-name": "Helvetica Neue",
+				"size": "18",
+				"alternative-font-names": "Segoe UI, Arial"
+			},
+			"modern_pill_value": {
+				"font-name": "Helvetica Neue",
+				"size": "22",
+				"alternative-font-names": "Segoe UI, Arial"
+			},
 			"Arial_18": {
 				"font-name": "Arial",
 				"size": "18"
@@ -82,6 +123,23 @@
 			}
 		},
 		"colors": {
+			"modern_bg": "#1c1d1fff",
+			"modern_panel": "#26272aff",
+			"modern_edge": "#35363aff",
+			"modern_text": "#e8e8eaff",
+			"modern_title": "#d9daddff",
+			"modern_label": "#bfc0c4ff",
+			"modern_dim": "#7c7e84ff",
+			"modern_seg_off": "#37383cff",
+			"modern_purple": "#b65cf2ff",
+			"modern_blue": "#3da0f5ff",
+			"modern_red": "#f2476bff",
+			"modern_pill": "#232427ff",
+			"modern_track": "#101113ff",
+			"modern_marker": "#a9aaaeff",
+			"modern_on_text": "#15161aff",
+			"modern_tick": "#55575cff",
+			"modern_hover": "#202124ff",
 			"New": "#b6b6b6ff",
 			"OS_back": "#c1c3c4ff",
 			"coverup": "#2f2d2dff",
@@ -198,6 +256,950 @@
 			}
 		},
 		"templates": {
+			"Modern": {
+				"attributes": {
+					"background-color": "modern_bg",
+					"background-color-draw-style": "filled",
+					"class": "CViewContainer",
+					"maxSize": "1520, 1120",
+					"minSize": "1520, 1120",
+					"mouse-enabled": "true",
+					"opacity": "1",
+					"origin": "0, 0",
+					"size": "1520, 1120",
+					"transparent": "false",
+					"wants-focus": "false"
+				},
+				"children": {
+					"CTextLabel": {
+						"attributes": {
+							"back-color": "~ TransparentCColor",
+							"class": "CTextLabel",
+							"font": "modern_title",
+							"font-antialias": "true",
+							"font-color": "modern_title",
+							"mouse-enabled": "false",
+							"opacity": "1",
+							"origin": "460, 18",
+							"size": "600, 68",
+							"style-no-frame": "true",
+							"text-alignment": "center",
+							"title": "I N F L A T O R",
+							"transparent": "true",
+							"uidesc-label": "Title",
+							"wants-focus": "false"
+						}
+					},
+					"CViewContainer": {
+						"attributes": {
+							"background-color": "modern_pill",
+							"background-color-draw-style": "filled",
+							"class": "Modern Panel",
+							"corner-radius": "14",
+							"frame-color": "modern_edge",
+							"frame-width": "2",
+							"mouse-enabled": "true",
+							"opacity": "1",
+							"origin": "16, 28",
+							"size": "230, 48",
+							"transparent": "false",
+							"uidesc-label": "Skin",
+							"wants-focus": "false"
+						},
+						"children": {
+							"CTextLabel": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "CTextLabel",
+									"font": "modern_pill_label",
+									"font-antialias": "true",
+									"font-color": "modern_dim",
+									"mouse-enabled": "false",
+									"opacity": "1",
+									"origin": "16, 0",
+									"size": "70, 48",
+									"style-no-frame": "true",
+									"text-alignment": "left",
+									"title": "SKIN",
+									"transparent": "true",
+									"uidesc-label": "Skin Caption",
+									"wants-focus": "false"
+								}
+							},
+							"COptionMenu": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "COptionMenu",
+									"control-tag": "GuiSwitch",
+									"default-value": "0",
+									"font": "modern_pill_value",
+									"font-antialias": "true",
+									"font-color": "modern_text",
+									"frame-color": "~ TransparentCColor",
+									"max-value": "2",
+									"menu-check-style": "true",
+									"menu-popup-style": "false",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "82, 0",
+									"size": "140, 48",
+									"style-no-frame": "true",
+									"text-alignment": "left",
+									"transparent": "true",
+									"uidesc-label": "Skin Menu",
+									"wants-focus": "true"
+								}
+							}
+						}
+					},
+					"CViewContainer": {
+						"attributes": {
+							"background-color": "modern_pill",
+							"background-color-draw-style": "filled",
+							"class": "Modern Panel",
+							"corner-radius": "14",
+							"frame-color": "modern_edge",
+							"frame-width": "2",
+							"mouse-enabled": "true",
+							"opacity": "1",
+							"origin": "990, 28",
+							"size": "130, 48",
+							"transparent": "false",
+							"uidesc-label": "OS",
+							"wants-focus": "false"
+						},
+						"children": {
+							"CTextLabel": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "CTextLabel",
+									"font": "modern_pill_label",
+									"font-antialias": "true",
+									"font-color": "modern_dim",
+									"mouse-enabled": "false",
+									"opacity": "1",
+									"origin": "16, 0",
+									"size": "70, 48",
+									"style-no-frame": "true",
+									"text-alignment": "left",
+									"title": "OS",
+									"transparent": "true",
+									"uidesc-label": "OS Caption",
+									"wants-focus": "false"
+								}
+							},
+							"COptionMenu": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "COptionMenu",
+									"control-tag": "OS",
+									"default-value": "0",
+									"font": "modern_pill_value",
+									"font-antialias": "true",
+									"font-color": "modern_text",
+									"frame-color": "~ TransparentCColor",
+									"max-value": "3",
+									"menu-check-style": "true",
+									"menu-popup-style": "false",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "56, 0",
+									"size": "66, 48",
+									"style-no-frame": "true",
+									"text-alignment": "left",
+									"transparent": "true",
+									"uidesc-label": "OS Menu",
+									"wants-focus": "true"
+								}
+							}
+						}
+					},
+					"CViewContainer": {
+						"attributes": {
+							"background-color": "modern_pill",
+							"background-color-draw-style": "filled",
+							"class": "Modern Panel",
+							"corner-radius": "14",
+							"frame-color": "modern_edge",
+							"frame-width": "2",
+							"mouse-enabled": "true",
+							"opacity": "1",
+							"origin": "1132, 28",
+							"size": "170, 48",
+							"transparent": "false",
+							"uidesc-label": "Phase",
+							"wants-focus": "false"
+						},
+						"children": {
+							"CTextLabel": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "CTextLabel",
+									"font": "modern_pill_label",
+									"font-antialias": "true",
+									"font-color": "modern_dim",
+									"mouse-enabled": "false",
+									"opacity": "1",
+									"origin": "16, 0",
+									"size": "70, 48",
+									"style-no-frame": "true",
+									"text-alignment": "left",
+									"title": "PHASE",
+									"transparent": "true",
+									"uidesc-label": "Phase Caption",
+									"wants-focus": "false"
+								}
+							},
+							"COptionMenu": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "COptionMenu",
+									"control-tag": "Phase",
+									"default-value": "0",
+									"font": "modern_pill_value",
+									"font-antialias": "true",
+									"font-color": "modern_text",
+									"frame-color": "~ TransparentCColor",
+									"max-value": "1",
+									"menu-check-style": "true",
+									"menu-popup-style": "false",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "95, 0",
+									"size": "67, 48",
+									"style-no-frame": "true",
+									"text-alignment": "left",
+									"transparent": "true",
+									"uidesc-label": "Phase Menu",
+									"wants-focus": "true"
+								}
+							}
+						}
+					},
+					"CViewContainer": {
+						"attributes": {
+							"background-color": "modern_pill",
+							"background-color-draw-style": "filled",
+							"class": "Modern Panel",
+							"corner-radius": "14",
+							"frame-color": "modern_edge",
+							"frame-width": "2",
+							"mouse-enabled": "true",
+							"opacity": "1",
+							"origin": "1314, 28",
+							"size": "190, 48",
+							"transparent": "false",
+							"uidesc-label": "Zoom",
+							"wants-focus": "false"
+						},
+						"children": {
+							"CTextLabel": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "CTextLabel",
+									"font": "modern_pill_label",
+									"font-antialias": "true",
+									"font-color": "modern_dim",
+									"mouse-enabled": "false",
+									"opacity": "1",
+									"origin": "16, 0",
+									"size": "70, 48",
+									"style-no-frame": "true",
+									"text-alignment": "left",
+									"title": "ZOOM",
+									"transparent": "true",
+									"uidesc-label": "Zoom Caption",
+									"wants-focus": "false"
+								}
+							},
+							"COptionMenu": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "COptionMenu",
+									"control-tag": "Zoom",
+									"default-value": "0",
+									"font": "modern_pill_value",
+									"font-antialias": "true",
+									"font-color": "modern_text",
+									"frame-color": "~ TransparentCColor",
+									"max-value": "6",
+									"menu-check-style": "true",
+									"menu-popup-style": "false",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "82, 0",
+									"size": "100, 48",
+									"style-no-frame": "true",
+									"text-alignment": "left",
+									"transparent": "true",
+									"uidesc-label": "Zoom Menu",
+									"wants-focus": "true"
+								}
+							}
+						}
+					},
+					"CViewContainer": {
+						"attributes": {
+							"background-color": "modern_panel",
+							"background-color-draw-style": "filled",
+							"class": "Modern Panel",
+							"corner-radius": "24",
+							"frame-color": "modern_edge",
+							"frame-width": "2",
+							"mouse-enabled": "true",
+							"opacity": "1",
+							"origin": "16, 104",
+							"size": "428, 1000",
+							"transparent": "false",
+							"uidesc-label": "Input Panel",
+							"wants-focus": "false"
+						},
+						"children": {
+							"CTextLabel": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "CTextLabel",
+									"font": "modern_label",
+									"font-antialias": "true",
+									"font-color": "modern_label",
+									"mouse-enabled": "false",
+									"opacity": "1",
+									"origin": "0, 32",
+									"size": "428, 34",
+									"style-no-frame": "true",
+									"text-alignment": "center",
+									"title": "I N P U T",
+									"transparent": "true",
+									"uidesc-label": "Input Label",
+									"wants-focus": "false"
+								}
+							},
+							"CTextEdit": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "Modern Value Edit",
+									"control-tag": "Input",
+									"decimals": "1",
+									"default-value": "0",
+									"font": "modern_value",
+									"font-antialias": "true",
+									"font-color": "modern_text",
+									"hover-color": "modern_hover",
+									"hover-frame-color": "modern_edge",
+									"max-value": "1",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "18, 80",
+									"size": "260, 60",
+									"style-no-frame": "true",
+									"text-alignment": "left",
+									"text-inset": "14, 0",
+									"transparent": "true",
+									"uidesc-label": "Input Value",
+									"unit": "dB",
+									"wants-focus": "true"
+								}
+							},
+							"CControl": {
+								"attributes": {
+									"active-color": "modern_blue",
+									"cap-height": "116",
+									"cap-width": "72",
+									"class": "Modern Fader",
+									"control-tag": "Input",
+									"default-value": "0.5",
+									"detent-value": "0.5",
+									"detent-zone": "18",
+									"indicator-color": "modern_text",
+									"marker-color": "modern_marker",
+									"marker-value": "0.5",
+									"max-value": "1",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "32, 172",
+									"size": "120, 792",
+									"snap-step": "0",
+									"snap-strength": "0.2",
+									"track-color": "modern_track",
+									"track-width": "12",
+									"transparent": "false",
+									"uidesc-label": "Input Fader",
+									"wants-focus": "true"
+								}
+							},
+							"CViewContainer": {
+								"attributes": {
+									"background-color": "~ TransparentCColor",
+									"class": "CViewContainer",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "268, 196",
+									"size": "128, 744",
+									"sub-controller": "myVuMeterController",
+									"transparent": "true",
+									"uidesc-label": "Input Meters",
+									"wants-focus": "false"
+								},
+								"children": {
+									"CControl": {
+										"attributes": {
+											"bar-gap": "16",
+											"bars": "1",
+											"class": "Modern Meter",
+											"control-tag": "InVuPPML",
+											"decrease-step-value": "0.1",
+											"default-value": "0",
+											"high-color": "modern_red",
+											"low-color": "modern_purple",
+											"max-value": "1",
+											"mid-color": "modern_blue",
+											"min-value": "0",
+											"mouse-enabled": "false",
+											"num-led": "25",
+											"off-color": "modern_seg_off",
+											"opacity": "1",
+											"orientation": "vertical",
+											"origin": "0, 0",
+											"segment-gap": "6",
+											"segment-radius": "5",
+											"size": "26, 744",
+											"transparent": "false",
+											"uidesc-label": "Input Meters L",
+											"wants-focus": "false",
+											"zone-high": "19",
+											"zone-mid": "10"
+										}
+									},
+									"CView": {
+										"attributes": {
+											"class": "Modern Meter Scale",
+											"font": "modern_scale",
+											"font-color": "modern_label",
+											"labels": "25:+6,22:+3,19:0,16:-3,13:-6,10:-12,7:-18,5:-26,3:-34,1:-42",
+											"mouse-enabled": "false",
+											"num-led": "25",
+											"opacity": "1",
+											"origin": "26, 0",
+											"segment-gap": "6",
+											"size": "76, 744",
+											"tick-color": "modern_tick",
+											"tick-every": "3",
+											"transparent": "false",
+											"uidesc-label": "dB Scale",
+											"wants-focus": "false"
+										}
+									},
+									"CControl": {
+										"attributes": {
+											"bar-gap": "16",
+											"bars": "1",
+											"class": "Modern Meter",
+											"control-tag": "InVuPPMR",
+											"decrease-step-value": "0.1",
+											"default-value": "0",
+											"high-color": "modern_red",
+											"low-color": "modern_purple",
+											"max-value": "1",
+											"mid-color": "modern_blue",
+											"min-value": "0",
+											"mouse-enabled": "false",
+											"num-led": "25",
+											"off-color": "modern_seg_off",
+											"opacity": "1",
+											"orientation": "vertical",
+											"origin": "102, 0",
+											"segment-gap": "6",
+											"segment-radius": "5",
+											"size": "26, 744",
+											"transparent": "false",
+											"uidesc-label": "Input Meters R",
+											"wants-focus": "false",
+											"zone-high": "19",
+											"zone-mid": "10"
+										}
+									}
+								}
+							}
+						}
+					},
+					"CViewContainer": {
+						"attributes": {
+							"background-color": "modern_panel",
+							"background-color-draw-style": "filled",
+							"class": "Modern Panel",
+							"corner-radius": "24",
+							"frame-color": "modern_edge",
+							"frame-width": "2",
+							"mouse-enabled": "true",
+							"opacity": "1",
+							"origin": "456, 104",
+							"size": "608, 1000",
+							"transparent": "false",
+							"uidesc-label": "Effect Curve Panel",
+							"wants-focus": "false"
+						},
+						"children": {
+							"CTextLabel": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "CTextLabel",
+									"font": "modern_label",
+									"font-antialias": "true",
+									"font-color": "modern_label",
+									"mouse-enabled": "false",
+									"opacity": "1",
+									"origin": "32, 32",
+									"size": "240, 34",
+									"style-no-frame": "true",
+									"text-alignment": "left",
+									"title": "E F F E C T",
+									"transparent": "true",
+									"uidesc-label": "Effect Label",
+									"wants-focus": "false"
+								}
+							},
+							"CTextLabel": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "CTextLabel",
+									"font": "modern_label",
+									"font-antialias": "true",
+									"font-color": "modern_label",
+									"mouse-enabled": "false",
+									"opacity": "1",
+									"origin": "336, 32",
+									"size": "240, 34",
+									"style-no-frame": "true",
+									"text-alignment": "right",
+									"title": "C U R V E",
+									"transparent": "true",
+									"uidesc-label": "Curve Label",
+									"wants-focus": "false"
+								}
+							},
+							"CTextEdit": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "Modern Value Edit",
+									"control-tag": "Effect",
+									"decimals": "1",
+									"default-value": "0",
+									"font": "modern_value",
+									"font-antialias": "true",
+									"font-color": "modern_text",
+									"hover-color": "modern_hover",
+									"hover-frame-color": "modern_edge",
+									"max-value": "1",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "18, 80",
+									"size": "260, 60",
+									"style-no-frame": "true",
+									"text-alignment": "left",
+									"text-inset": "14, 0",
+									"transparent": "true",
+									"uidesc-label": "Effect Value",
+									"unit": "%",
+									"wants-focus": "true"
+								}
+							},
+							"CTextEdit": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "Modern Value Edit",
+									"control-tag": "Curve",
+									"decimals": "1",
+									"default-value": "0",
+									"font": "modern_value",
+									"font-antialias": "true",
+									"font-color": "modern_text",
+									"hover-color": "modern_hover",
+									"hover-frame-color": "modern_edge",
+									"max-value": "1",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "330, 80",
+									"size": "260, 60",
+									"style-no-frame": "true",
+									"text-alignment": "right",
+									"text-inset": "14, 0",
+									"transparent": "true",
+									"uidesc-label": "Curve Value",
+									"unit": "",
+									"wants-focus": "true"
+								}
+							},
+							"CControl": {
+								"attributes": {
+									"active-color": "modern_blue",
+									"cap-height": "116",
+									"cap-width": "72",
+									"class": "Modern Fader",
+									"control-tag": "Effect",
+									"default-value": "0",
+									"detent-value": "0.5",
+									"detent-zone": "10",
+									"indicator-color": "modern_text",
+									"marker-color": "modern_marker",
+									"marker-value": "0.5",
+									"max-value": "1",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "32, 172",
+									"size": "120, 792",
+									"snap-step": "0.01",
+									"snap-strength": "0.2",
+									"track-color": "modern_track",
+									"track-width": "12",
+									"transparent": "false",
+									"uidesc-label": "Effect Fader",
+									"wants-focus": "true"
+								}
+							},
+							"CControl": {
+								"attributes": {
+									"active-color": "modern_blue",
+									"cap-height": "116",
+									"cap-width": "72",
+									"class": "Modern Fader",
+									"control-tag": "Curve",
+									"default-value": "0.5",
+									"detent-value": "0.5",
+									"detent-zone": "10",
+									"indicator-color": "modern_text",
+									"marker-color": "modern_marker",
+									"marker-value": "0.5",
+									"max-value": "1",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "456, 172",
+									"size": "120, 792",
+									"snap-step": "0.01",
+									"snap-strength": "0.2",
+									"track-color": "modern_track",
+									"track-width": "12",
+									"transparent": "false",
+									"uidesc-label": "Curve Fader",
+									"wants-focus": "true"
+								}
+							},
+							"CViewContainer": {
+								"attributes": {
+									"background-color": "~ TransparentCColor",
+									"class": "CViewContainer",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "270, 172",
+									"size": "68, 446",
+									"sub-controller": "myVuMeterController",
+									"transparent": "true",
+									"uidesc-label": "Effect Meter",
+									"wants-focus": "false"
+								},
+								"children": {
+									"CControl": {
+										"attributes": {
+											"bar-gap": "16",
+											"bars": "2",
+											"class": "Modern Meter",
+											"control-tag": "Meter",
+											"decrease-step-value": "0.1",
+											"default-value": "0",
+											"high-color": "modern_red",
+											"low-color": "modern_purple",
+											"max-value": "1",
+											"mid-color": "modern_blue",
+											"min-value": "0",
+											"mouse-enabled": "false",
+											"num-led": "25",
+											"off-color": "modern_seg_off",
+											"opacity": "1",
+											"orientation": "vertical",
+											"origin": "0, 0",
+											"segment-gap": "4",
+											"segment-radius": "4",
+											"size": "68, 446",
+											"transparent": "false",
+											"uidesc-label": "Effect Meter Bars",
+											"wants-focus": "false",
+											"zone-high": "19",
+											"zone-mid": "10"
+										}
+									}
+								}
+							},
+							"CControl": {
+								"attributes": {
+									"base-color": "modern_pill",
+									"class": "Modern Button",
+									"color": "modern_red",
+									"control-tag": "Clip",
+									"corner-radius": "18",
+									"default-value": "0",
+									"font": "modern_button",
+									"max-value": "1",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"on-text-color": "modern_on_text",
+									"opacity": "1",
+									"origin": "206, 648",
+									"size": "196, 104",
+									"sub-font": "modern_button_sub",
+									"sub-title": "0 dB",
+									"title": "CLIP",
+									"transparent": "false",
+									"uidesc-label": "Clip Button",
+									"wants-focus": "false"
+								}
+							},
+							"CControl": {
+								"attributes": {
+									"base-color": "modern_pill",
+									"class": "Modern Button",
+									"color": "modern_blue",
+									"control-tag": "Split",
+									"corner-radius": "18",
+									"default-value": "0",
+									"font": "modern_button",
+									"max-value": "1",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"on-text-color": "modern_on_text",
+									"opacity": "1",
+									"origin": "206, 756",
+									"size": "196, 104",
+									"sub-font": "modern_button_sub",
+									"sub-title": "SPLIT",
+									"title": "BAND",
+									"transparent": "false",
+									"uidesc-label": "Split Button",
+									"wants-focus": "false"
+								}
+							},
+							"CControl": {
+								"attributes": {
+									"base-color": "modern_pill",
+									"class": "Modern Button",
+									"color": "modern_purple",
+									"control-tag": "In",
+									"corner-radius": "18",
+									"default-value": "1",
+									"font": "modern_button",
+									"max-value": "1",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"on-text-color": "modern_on_text",
+									"opacity": "1",
+									"origin": "206, 864",
+									"size": "196, 104",
+									"sub-font": "modern_button_sub",
+									"sub-title": "IN",
+									"title": "EFFECT",
+									"transparent": "false",
+									"uidesc-label": "Effect In Button",
+									"wants-focus": "false"
+								}
+							}
+						}
+					},
+					"CViewContainer": {
+						"attributes": {
+							"background-color": "modern_panel",
+							"background-color-draw-style": "filled",
+							"class": "Modern Panel",
+							"corner-radius": "24",
+							"frame-color": "modern_edge",
+							"frame-width": "2",
+							"mouse-enabled": "true",
+							"opacity": "1",
+							"origin": "1076, 104",
+							"size": "428, 1000",
+							"transparent": "false",
+							"uidesc-label": "Output Panel",
+							"wants-focus": "false"
+						},
+						"children": {
+							"CTextLabel": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "CTextLabel",
+									"font": "modern_label",
+									"font-antialias": "true",
+									"font-color": "modern_label",
+									"mouse-enabled": "false",
+									"opacity": "1",
+									"origin": "0, 32",
+									"size": "428, 34",
+									"style-no-frame": "true",
+									"text-alignment": "center",
+									"title": "O U T P U T",
+									"transparent": "true",
+									"uidesc-label": "Output Label",
+									"wants-focus": "false"
+								}
+							},
+							"CTextEdit": {
+								"attributes": {
+									"back-color": "~ TransparentCColor",
+									"class": "Modern Value Edit",
+									"control-tag": "Output",
+									"decimals": "1",
+									"default-value": "0",
+									"font": "modern_value",
+									"font-antialias": "true",
+									"font-color": "modern_text",
+									"hover-color": "modern_hover",
+									"hover-frame-color": "modern_edge",
+									"max-value": "1",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "18, 80",
+									"size": "260, 60",
+									"style-no-frame": "true",
+									"text-alignment": "left",
+									"text-inset": "14, 0",
+									"transparent": "true",
+									"uidesc-label": "Output Value",
+									"unit": "dB",
+									"wants-focus": "true"
+								}
+							},
+							"CControl": {
+								"attributes": {
+									"active-color": "modern_blue",
+									"cap-height": "116",
+									"cap-width": "72",
+									"class": "Modern Fader",
+									"control-tag": "Output",
+									"default-value": "1",
+									"detent-value": "1",
+									"detent-zone": "18",
+									"indicator-color": "modern_text",
+									"marker-color": "modern_marker",
+									"marker-value": "1",
+									"max-value": "1",
+									"min-value": "0",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "32, 172",
+									"size": "120, 792",
+									"snap-step": "0",
+									"snap-strength": "0.2",
+									"track-color": "modern_track",
+									"track-width": "12",
+									"transparent": "false",
+									"uidesc-label": "Output Fader",
+									"wants-focus": "true"
+								}
+							},
+							"CViewContainer": {
+								"attributes": {
+									"background-color": "~ TransparentCColor",
+									"class": "CViewContainer",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "268, 196",
+									"size": "128, 744",
+									"sub-controller": "myVuMeterController",
+									"transparent": "true",
+									"uidesc-label": "Output Meters",
+									"wants-focus": "false"
+								},
+								"children": {
+									"CControl": {
+										"attributes": {
+											"bar-gap": "16",
+											"bars": "1",
+											"class": "Modern Meter",
+											"control-tag": "OutVuPPML",
+											"decrease-step-value": "0.1",
+											"default-value": "0",
+											"high-color": "modern_red",
+											"low-color": "modern_purple",
+											"max-value": "1",
+											"mid-color": "modern_blue",
+											"min-value": "0",
+											"mouse-enabled": "false",
+											"num-led": "25",
+											"off-color": "modern_seg_off",
+											"opacity": "1",
+											"orientation": "vertical",
+											"origin": "0, 0",
+											"segment-gap": "6",
+											"segment-radius": "5",
+											"size": "26, 744",
+											"transparent": "false",
+											"uidesc-label": "Output Meters L",
+											"wants-focus": "false",
+											"zone-high": "19",
+											"zone-mid": "10"
+										}
+									},
+									"CView": {
+										"attributes": {
+											"class": "Modern Meter Scale",
+											"font": "modern_scale",
+											"font-color": "modern_label",
+											"labels": "25:+6,22:+3,19:0,16:-3,13:-6,10:-12,7:-18,5:-26,3:-34,1:-42",
+											"mouse-enabled": "false",
+											"num-led": "25",
+											"opacity": "1",
+											"origin": "26, 0",
+											"segment-gap": "6",
+											"size": "76, 744",
+											"tick-color": "modern_tick",
+											"tick-every": "3",
+											"transparent": "false",
+											"uidesc-label": "dB Scale",
+											"wants-focus": "false"
+										}
+									},
+									"CControl": {
+										"attributes": {
+											"bar-gap": "16",
+											"bars": "1",
+											"class": "Modern Meter",
+											"control-tag": "OutVuPPMR",
+											"decrease-step-value": "0.1",
+											"default-value": "0",
+											"high-color": "modern_red",
+											"low-color": "modern_purple",
+											"max-value": "1",
+											"mid-color": "modern_blue",
+											"min-value": "0",
+											"mouse-enabled": "false",
+											"num-led": "25",
+											"off-color": "modern_seg_off",
+											"opacity": "1",
+											"orientation": "vertical",
+											"origin": "102, 0",
+											"segment-gap": "6",
+											"segment-radius": "5",
+											"size": "26, 744",
+											"transparent": "false",
+											"uidesc-label": "Output Meters R",
+											"wants-focus": "false",
+											"zone-high": "19",
+											"zone-mid": "10"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
 			"Original": {
 				"attributes": {
 					"background-color": "~ BlackCColor",

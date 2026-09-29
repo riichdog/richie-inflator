@@ -160,15 +160,34 @@ public:
 
     Steinberg::tresult PLUGIN_API canResize() SMTG_OVERRIDE;
     
-    double getGuiState() {return guiState;}
-    void   setGuiState(double newState) {guiState = newState;}
+    int32_t getGuiState() const {return guiState;}
+    void    setGuiState(int32_t newState) {guiState = newState;}
 protected:
-    double guiState = 0.0;
+    int32_t guiState = -1;
 };
 
 }
 
 namespace yg331 {
+//------------------------------------------------------------------------
+// Editor skins, in the order of the "GUI Switch" parameter
+//------------------------------------------------------------------------
+enum GuiSkin : Steinberg::int32 {
+    kGuiOriginal = 0,
+    kGuiTwarch,
+    kGuiModern,
+    kNumGuiSkins
+};
+
+inline const char* guiTemplateName(Steinberg::int32 skin)
+{
+    switch (skin) {
+        case kGuiOriginal: return "Original";
+        case kGuiTwarch:   return "Twarch";
+        default:           return "Modern";
+    }
+}
+
 //------------------------------------------------------------------------
 // VuMeterController
 //------------------------------------------------------------------------
@@ -425,7 +444,7 @@ private:
     Steinberg::Vst::ParamValue statePhase  = 0.0;
     Steinberg::int32           stateBypass = 0;
 
-	Steinberg::Vst::ParamValue stateGUI    = 0.0;
+	Steinberg::int32           stateGUI    = kGuiModern;
     
     Steinberg::Vst::ParamValue vuInL = 0.0, vuInR = 0.0, vuOutL = 0.0, vuOutR = 0.0, vuEffect = 0.0;
 };
