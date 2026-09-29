@@ -9,9 +9,17 @@ Also double precision input / output if supported.
 
 [![Static Badge](https://img.shields.io/badge/coffee%20maybe%3F%20%3D%5D%20-gray?style=for-the-badge&logo=buy-me-a-coffee)](https://buymeacoffee.com/kirikiaris)
 
-<img src="https://github.com/Kiriki-liszt/JS_Inflator_to_VST2_VST3/raw/main/screenshots/screenshot_both.png"  width="600"/>  
+<img src="screenshots/screenshot_modern.png"  width="600"/>  
 
-Comes in two GUIs. The alternative GUI is made by Twarch.  
+Comes in three GUIs, switchable from the skin menu in the editor:
+
+* **Modern** (default): a dark, vector-drawn skin that stays sharp at every zoom level.
+  * Input and Output faders stop at exactly 0 dB, and their markers turn blue there.
+  * Effect and Curve have a lighter stop at their middle (50 % and 0), and whole numbers pull the fader slightly. Hold Shift or type a value for decimals.
+  * Click any value to type a number. Double-click or Cmd/Ctrl-click a fader to reset it. Hold Shift while dragging for fine moves.
+* **Original** and **Twarch**: the classic bitmap skins. The Twarch skin is made by Twarch.
+
+<img src="https://github.com/Kiriki-liszt/JS_Inflator_to_VST2_VST3/raw/main/screenshots/screenshot_both.png"  width="600"/>  
 
 ### Compatibility  
 
@@ -276,6 +284,6 @@ Modified for my need: Fractional resampling, Interpolation parts are deleted.
 
 ## Todo
 
-* [ ] GUI : double click to enter value.
-* [ ] Double click to reset to default.
+* [x] GUI : click to enter value (Modern skin).
+* [x] Double click to reset to default (Modern skin).
 * [ ] Bypass automation flag.

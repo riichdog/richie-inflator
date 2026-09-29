@@ -1,6 +1,27 @@
 # How to build  
 
 Following guide is based on VSTSDK v3.7.12, where Windows bundle build is fixed and AudioUnit SDK is supported.  
+VSTSDK v3.8.1 is also tested (with Xcode 26). v3.7.12 fails to compile with that compiler.  
+
+## Quick start (command line, macOS)
+
+``` console
+git clone --branch v3.8.1_build_84 --recursive https://github.com/steinbergmedia/vst3sdk.git ~/VST_SDK/vst3sdk
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DSMTG_ENABLE_VST3_PLUGIN_EXAMPLES=OFF -DSMTG_ENABLE_VST3_HOSTING_EXAMPLES=OFF
+cmake --build build
+```
+
+The SDK path defaults to `~/VST_SDK/vst3sdk` on macOS and `C:/VST_SDK/vst3sdk` on Windows. Override it with `-Dvst3sdk_SOURCE_DIR=/path/to/vst3sdk`.  
+If `xcode-select` points at the Command Line Tools, prefix the commands with `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer`.  
+
+### UI tools
+
+Configure with `-DJSIF_BUILD_UI_TOOLS=ON` to also build:
+
+- `jsif_ui_tests` and `jsif_controller_tests`: unit tests for the Modern editor views, skin state and value readouts.
+- `jsif_snapshot`: renders an editor template to PNG without a host, for example:  
+  `build/bin/Debug/jsif_snapshot build/VST3/Debug/JS_Inflator.vst3 Modern out.png 0.5 0=0.5 t:0=0.00`  
+  `tag=value` sets a control's normalized value, `t:tag=text` sets a readout's text and `m:tag=text` sets a menu entry.
 
 ## 0. Set VSTSDK  
 

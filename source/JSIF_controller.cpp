@@ -3,6 +3,9 @@
 //------------------------------------------------------------------------
 
 #include "JSIF_controller.h"
+
+#include <algorithm>
+#include <cmath>
 #include "JSIF_cids.h"
 #include "vstgui/plugin-bindings/vst3editor.h"
 
@@ -15,6 +18,22 @@
 #include "vstgui/uidescription/detail/uiviewcreatorattributes.h"
 
 using namespace Steinberg;
+
+namespace {
+// marks the skin index appended to the controller state (ASCII "JSGU")
+constexpr Steinberg::int32 kGuiStateMagic = 0x4A534755;
+
+Steinberg::int32 guiSkinFromNormalized(Steinberg::Vst::ParamValue value)
+{
+    return std::clamp<Steinberg::int32>(
+        static_cast<Steinberg::int32>(std::lround(value * (yg331::kNumGuiSkins - 1))), 0, yg331::kNumGuiSkins - 1);
+}
+
+Steinberg::Vst::ParamValue guiSkinToNormalized(Steinberg::int32 skin)
+{
+    return static_cast<Steinberg::Vst::ParamValue>(skin) / (yg331::kNumGuiSkins - 1);
+}
+} // namespace
 
 static const std::string kAttrVuOnColor  = "vu-on-color";
 static const std::string kAttrVuOffColor = "vu-off-color";
@@ -389,7 +408,8 @@ tresult PLUGIN_API JSIF_Controller::initialize(FUnknown* context)
 	Vst::StringListParameter* GuiSwitch = new Vst::StringListParameter(STR("GUI Switch"), kGuiSwitch);
 	GuiSwitch->appendString(STR("Original"));
 	GuiSwitch->appendString(STR("Twarch"));
-	GuiSwitch->setNormalized(GuiSwitch->toNormalized(0));
+	GuiSwitch->appendString(STR("Modern"));
+	GuiSwitch->setNormalized(GuiSwitch->toNormalized(kGuiModern));
 	GuiSwitch->addDependent(this);
 	uiParameters.addParameter(GuiSwitch);
 
@@ -494,6 +514,8 @@ tresult PLUGIN_API JSIF_Controller::setState(IBStream* state)
     Vst::ParamValue savedZoom   = 0.0;
     Vst::ParamValue savedPhase  = 0.0;
     Vst::ParamValue savedGUI    = 0.0;
+    int32           guiMagic    = 0;
+    int32           savedSkin   = kGuiOriginal;
     //int32           savedBypass = 0;
     
     if (streamer.readDouble(savedInput)  == false) savedInput  = 0.5;
@@ -507,6 +529,11 @@ tresult PLUGIN_API JSIF_Controller::setState(IBStream* state)
     if (streamer.readDouble(savedZoom)   == false) savedZoom   = 0.0;
     if (streamer.readDouble(savedPhase)  == false) savedPhase  = 0.0;
     if (streamer.readDouble(savedGUI)    == false) savedGUI    = 0.0;
+    // v2.1+ appends the skin index; older states only have the 2-entry normalized value
+    if (streamer.readInt32(guiMagic) && guiMagic == kGuiStateMagic && streamer.readInt32(savedSkin))
+        savedSkin = std::clamp<int32>(savedSkin, 0, kNumGuiSkins - 1);
+    else
+        savedSkin = savedGUI >= 0.5 ? kGuiTwarch : kGuiOriginal;
     //if (streamer.readInt32 (savedBypass) == false) return kResultFalse;
 
     setParamNormalized(kParamInput,  savedInput);
@@ -519,7 +546,7 @@ tresult PLUGIN_API JSIF_Controller::setState(IBStream* state)
     setParamNormalized(kParamSplit,  savedSplit  ? 1 : 0);
     setParamNormalized(kParamZoom,   savedZoom);
     setParamNormalized(kParamPhase,  savedPhase);
-    setParamNormalized(kGuiSwitch,   savedGUI);
+    setParamNormalized(kGuiSwitch,   guiSkinToNormalized(savedSkin));
     //setParamNormalized(kParamBypass, savedBypass ? 1 : 0);
 
     stateInput  = savedInput;
@@ -532,7 +559,7 @@ tresult PLUGIN_API JSIF_Controller::setState(IBStream* state)
     stateSplit  = savedSplit;
     stateZoom   = savedZoom;
     statePhase  = savedPhase;
-    stateGUI    = savedGUI;
+    stateGUI    = savedSkin;
     //stateBypass = savedBypass;
 
     return kResultTrue;
@@ -557,7 +584,7 @@ tresult PLUGIN_API JSIF_Controller::getState(IBStream* state)
     stateSplit  = getParamNormalized (kParamSplit);
     stateZoom   = getParamNormalized (kParamZoom);
     statePhase  = getParamNormalized (kParamPhase);
-	stateGUI    = getParamNormalized (kGuiSwitch);
+	stateGUI    = guiSkinFromNormalized (getParamNormalized (kGuiSwitch));
     
     streamer.writeDouble(stateInput);
     streamer.writeDouble(stateEffect);
@@ -569,7 +596,10 @@ tresult PLUGIN_API JSIF_Controller::getState(IBStream* state)
     streamer.writeInt32(stateSplit ? 1 : 0);
     streamer.writeDouble(stateZoom);
     streamer.writeDouble(statePhase);
-    streamer.writeDouble(stateGUI);
+    // older versions read this as Original (0) / Twarch (1)
+    streamer.writeDouble(stateGUI == kGuiTwarch ? 1.0 : 0.0);
+    streamer.writeInt32(kGuiStateMagic);
+    streamer.writeInt32(stateGUI);
     //streamer.writeInt32(stateBypass ? 1 : 0);
 
 	return kResultTrue;
@@ -583,10 +613,7 @@ IPlugView* PLUGIN_API JSIF_Controller::createView(FIDString name)
 	{
         VSTGUI::GUIEditor* view;
 		// create your editor here and return a IPlugView ptr of it
-		if (stateGUI == 0.0) 
-			view = new VSTGUI::GUIEditor(this, "Original", "JSIF_editor.uidesc");
-		else
-			view = new VSTGUI::GUIEditor(this, "Twarch", "JSIF_editor.uidesc");
+		view = new VSTGUI::GUIEditor(this, guiTemplateName(stateGUI), "JSIF_editor.uidesc");
         view->setGuiState(stateGUI);
         
         std::vector<double> _zoomFactors;
@@ -667,7 +694,7 @@ void PLUGIN_API JSIF_Controller::update(FUnknown* changedUnknown, int32 message)
 	}
 	if (param->getInfo().id == kGuiSwitch)
 	{
-        stateGUI = param->getNormalized();
+        stateGUI = guiSkinFromNormalized(param->getNormalized());
         for (EditorVector::const_iterator it = editors.begin(), end = editors.end(); it != end; ++it)
         {
             /*
@@ -680,8 +707,7 @@ void PLUGIN_API JSIF_Controller::update(FUnknown* changedUnknown, int32 message)
             VSTGUI::GUIEditor* editor = dynamic_cast<VSTGUI::GUIEditor*>(*it);
             if (editor) {
                 if (editor->getGuiState() != stateGUI) {
-                    if      (stateGUI == 0.0) editor->exchangeView("Original");
-                    else if (stateGUI == 1.0) editor->exchangeView("Twarch");
+                    editor->exchangeView(guiTemplateName(stateGUI));
                     editor->setGuiState(stateGUI);
                 }
             }
@@ -695,8 +721,7 @@ void JSIF_Controller::editorAttached(Steinberg::Vst::EditorView* editor)
     VSTGUI::GUIEditor* _editor = dynamic_cast<VSTGUI::GUIEditor*>(editor);
     if (_editor) {
         if (_editor->getGuiState() != stateGUI) {
-            if      (stateGUI == 0.0) _editor->exchangeView("Original");
-            else if (stateGUI == 1.0) _editor->exchangeView("Twarch");
+            _editor->exchangeView(guiTemplateName(stateGUI));
             _editor->setGuiState(stateGUI);
         }
     }

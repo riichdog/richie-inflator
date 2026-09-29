@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 3.14.0)
 set(CMAKE_OSX_DEPLOYMENT_TARGET 10.11 CACHE STRING "")
 
-if(SMTG_MAC)
-    set(vst3sdk_SOURCE_DIR "/Users/yoon/VST_SDK/vst3sdk")
-elseif(SMTG_WIN)
-    set(vst3sdk_SOURCE_DIR "C:/VST_SDK/vst3sdk")
-endif(SMTG_MAC)
+# Override with -Dvst3sdk_SOURCE_DIR=/path/to/vst3sdk
+if(CMAKE_HOST_APPLE)
+    set(vst3sdk_SOURCE_DIR "$ENV{HOME}/VST_SDK/vst3sdk" CACHE PATH "Path to the VST3 SDK")
+elseif(CMAKE_HOST_WIN32)
+    set(vst3sdk_SOURCE_DIR "C:/VST_SDK/vst3sdk" CACHE PATH "Path to the VST3 SDK")
+endif()
 
 if(GITHUB_ACTIONS) 
     set(vst3sdk_SOURCE_DIR ${CMAKE_SOURCE_DIR}/vst3sdk)
@@ -23,6 +24,11 @@ project(JS_Inflator
     DESCRIPTION "JS Inflator VST 3 Plug-in"
 )
 
+# VSTGUI's macOS sources are Objective-C++ (needed by VST3 SDK 3.8+)
+if(APPLE)
+    enable_language(OBJC OBJCXX)
+endif()
+
 set(SMTG_VSTGUI_ROOT "${vst3sdk_SOURCE_DIR}")
 
 add_subdirectory(${vst3sdk_SOURCE_DIR} ${PROJECT_BINARY_DIR}/vst3sdk)
@@ -37,6 +43,8 @@ smtg_add_vst3plugin(JS_Inflator
     source/JSIF_controller.h
     source/JSIF_controller.cpp
     source/JSIF_entry.cpp
+    source/JSIF_ui.h
+    source/JSIF_ui.cpp
 )
 
 #- VSTGUI Wanted ----
@@ -148,3 +156,39 @@ if (SMTG_MAC AND XCODE AND SMTG_COREAUDIO_SDK_PATH)
 		INFO_PLIST_TEMPLATE resource/au-info.plist
 		VST3_PLUGIN_TARGET JS_Inflator)
 endif(SMTG_MAC AND XCODE AND SMTG_COREAUDIO_SDK_PATH)
+
+# UI tools (macOS): jsif_snapshot renders a uidesc template to PNG without a host,
+# jsif_ui_tests unit-tests the Modern editor views.
+option(JSIF_BUILD_UI_TOOLS "Build the jsif_snapshot and jsif_ui_tests tools" OFF)
+if(JSIF_BUILD_UI_TOOLS AND SMTG_MAC AND SMTG_ENABLE_VSTGUI_SUPPORT)
+    foreach(tool jsif_snapshot jsif_ui_tests)
+        add_executable(${tool} source/JSIF_ui.cpp)
+        target_link_libraries(${tool}
+            PRIVATE
+                vstgui_uidescription
+                vstgui
+                "-framework CoreFoundation"
+                "-framework Cocoa"
+                "-framework QuartzCore"
+                "-framework Accelerate"
+                "-framework OpenGL"
+        )
+        target_include_directories(${tool} PRIVATE "${vst3sdk_SOURCE_DIR}/vstgui4")
+        target_compile_definitions(${tool} PRIVATE $<IF:$<CONFIG:Debug>,DEVELOPMENT=1,RELEASE=1>)
+    endforeach()
+    target_sources(jsif_snapshot PRIVATE tools/snapshot.cpp)
+    target_sources(jsif_ui_tests PRIVATE tools/ui_tests.cpp)
+    add_dependencies(jsif_snapshot JS_Inflator)
+
+    # controller tests link the whole plug-in (the SDK expects a factory entry point)
+    add_executable(jsif_controller_tests
+        tools/controller_tests.cpp
+        "${vst3sdk_SOURCE_DIR}/public.sdk/source/common/memorystream.cpp"
+        source/JSIF_controller.cpp
+        source/JSIF_processor.cpp
+        source/JSIF_entry.cpp
+        source/JSIF_ui.cpp
+    )
+    target_link_libraries(jsif_controller_tests PRIVATE sdk vstgui_support r8brain-free-src)
+    target_include_directories(jsif_controller_tests PRIVATE "${PROJECT_BINARY_DIR}")
+endif()
